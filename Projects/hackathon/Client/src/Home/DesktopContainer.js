@@ -27,16 +27,32 @@ import { Route,
   Switch} from 'react-router-dom'
 
 class DesktopContainer extends Component {
-    state = {};
+    state = {loading : true , loggedIn :false };
     static propTypes = {
       color: PropTypes.string,
     }
+
+    componentWillMount = () => {
+  fire.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.setState({ loggedIn: true });
+          console.log(user.email);
+        } else {
+          this.setState({ loading: false, loggedIn: false });
+          console.log("xyz");
+        }
+      });
+    };
+
+
+
+
   
     hideFixedMenu = () => this.setState({ fixed: false });
     showFixedMenu = () => this.setState({ fixed: true });
   
     render() {
-      const { children , loggedIn } = this.props;
+      const { children } = this.props;
       const { fixed } = this.state;
 
       console.log(this.props.loggedIn);
