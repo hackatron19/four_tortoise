@@ -20,8 +20,8 @@ import { Route,
   import fire from "../firebase";
   import "../App.css";
 
-  import Customer from './Customer';
-  import Retailer from './Retailer';
+  import Customer from './Customer/Customer';
+  import Retailer from './Retailer/Retailer';
 
 
  
@@ -29,7 +29,7 @@ import { Route,
   class Account extends Component {
     constructor(props) {
       super(props);
-      this.state = {type:"xxx", loading: true}
+      this.state = {type:"xxx", loading: true  , peopleId :""}
 
 
     }
@@ -54,13 +54,11 @@ import { Route,
   .ref(`/people/`)
   .once("value", snapshot => {
     var obj = snapshot.val();
-  
-    
+
   for (let a in obj) {
     if(obj[a].email === email )
-    {
-        
-      this.setState({type : obj[a].type});
+    {     
+      this.setState({type : obj[a].type , peopleId : a});
     }
      
    
@@ -86,7 +84,7 @@ return ( <div>
 
          
      {this.state.type ==="xxx" ? null : 
-     this.state.type ==="Customer" ? <Customer/> : <Retailer/> }
+     this.state.type ==="Customer" ? <Customer/> : <Retailer peopleId={this.state.peopleId} /> }
               
 </Grid.Column>
 </Grid>

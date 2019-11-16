@@ -13,9 +13,10 @@ import Auth from './Auth/Auth';
 import ProfielInfo from './Profile/ProfileInfo';
 import ResisterRetailer from './Admin/Register';
 import VillageList from './ListVillage/List';
-import Retailer from './Account/Retailer';
+import Retailer from './Account/Retailer/Retailer';
 import User from './User/User';
 import Account from "./Account/Account";
+import FoodItem from './FoodList/Foodlist';
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
       <Route path="/villageList" component={VillageList}/>
       <Route path="/retailer" component={Retailer}/>
       <Route path="/userProfile" component={User}/>
-      <Route path="/account" component={Account} />
+      <Route path= "/account" component={Account} />
+      <Route path= "/buynow" component={FoodItem} />
      
     </Switch>
   </Router>
