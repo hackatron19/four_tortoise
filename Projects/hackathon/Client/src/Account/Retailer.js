@@ -32,7 +32,7 @@ import { Route,
   
   
 
-  class Account extends Component {
+  class Retailer extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -300,4 +300,4 @@ onClickButtonAdder(event) {
   }
 
   
-  export default Account;
+  export default Retailer;

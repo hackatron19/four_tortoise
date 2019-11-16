@@ -15,7 +15,11 @@ import {
   Divider
 } from 'semantic-ui-react'
 
-import Axios from 'axios';
+import { Route,
+  Link,
+  BrowserRouter as Router , Redirect ,
+  Switch} from 'react-router-dom'
+
 
 import fire from '../firebase';
 
@@ -28,7 +32,7 @@ class ProfileInfo extends Component {
     constructor(props){
         super(props);
 
-        this.state= {toggle: true}
+        this.state= {toggle: true , loggedIn: true , email:"" , redirect:false , loading: false}
 
       this.toggleChange =  this.toggleChange.bind(this);
        
@@ -39,30 +43,52 @@ class ProfileInfo extends Component {
     this.setState({toggle: !this.state.toggle});
   }
 
-  componentDidMount(){
-    Axios({
-      method: 'get',
-      url: 'https://api.data.gov.in/resource/cb579e8f-e4e0-48eb-a058-1fc812a38ff2?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&offset=0&limit=10',
-      params : {
-         records : { district_name: "Saharanpur" }
+  
+  componentWillMount(){
+
+fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ loggedIn: true , email:user.email});
       }
-    })
-    .then( (data) =>
-    {
-        console.log(data);
-    })
-    .catch((err) =>{
-        console.log(err);
+      else{
+        console.log("{}{}{}")
+      }
     });
-
-
   }
+
+ componentDidMount(){
+
+  this.setState({loading:true});
+
+  fire.database()
+  .ref(`/people/`)
+  .once("value", snapshot => {
+    var obj = snapshot.val();
+    
+  for (let a in obj) {
+    if(obj[a].email === this.state.email )
+    {
+      this.setState({redirect : true})
+    }
+     
+   
+    };
+
+    this.setState({loading:false});
+  });  
+
+
+ }
 
 
      
   render() {
+
+    if(this.state.redirect)
+      {return <Redirect push to="/"/> }
     
     return ( <div>
+      {this.state.loading ? <Loader dimmer /> : null}
       <Grid  style={{ marginTop: "0vh", minHeight: "100vh"  }}>
 <Grid.Column id="headerContainer"   style={{  backgroundColor: "#123445" }}>
 
@@ -80,7 +106,12 @@ class ProfileInfo extends Component {
 
 </Grid>
 
-{this.state.toggle ? <Urban type="Customer"/> : <Rural type="Villager"/>}
+{this.state.toggle ? <Urban type="Customer" 
+email={this.state.email} 
+loggedIn={this.state.loggedIn}/> 
+: <Rural type="Villager"
+email={this.state.email} 
+ loggedIn={this.state.loggedIn} />}
   
 
 </Grid.Column>

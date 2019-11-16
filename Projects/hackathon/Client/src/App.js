@@ -14,6 +14,8 @@ import ProfielInfo from './Profile/ProfileInfo';
 import ResisterRetailer from './Admin/Register';
 import VillageList from './ListVillage/List';
 import Retailer from './Account/Retailer';
+import User from './User/User';
+import Account from "./Account/Account";
 
 function App() {
   return (
@@ -25,7 +27,9 @@ function App() {
       <Route path="/profileInfo" component={ProfielInfo}/>
       <Route path="/admin/resisterRetailer" component={ResisterRetailer}/>
       <Route path="/villageList" component={VillageList}/>
-      <Route path="/retailer" component={Retailer}/>}
+      <Route path="/retailer" component={Retailer}/>
+      <Route path="/userProfile" component={User}/>
+      <Route path="/account" component={Account} />
      
     </Switch>
   </Router>

@@ -33,15 +33,7 @@ class DesktopContainer extends Component {
     }
 
     componentWillMount = () => {
-  fire.auth().onAuthStateChanged(user => {
-        if (user) {
-          this.setState({ loggedIn: true });
-          console.log(user.email);
-        } else {
-          this.setState({ loading: false, loggedIn: false });
-          console.log("xyz");
-        }
-      });
+ 
     };
 
 

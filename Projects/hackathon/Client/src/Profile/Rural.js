@@ -16,6 +16,7 @@ import {
 
 import Axios from 'axios';
 
+
 import { Route,
   Link,
   BrowserRouter as Router , Redirect ,
@@ -69,8 +70,7 @@ class Rural extends Component {
              address :"",
              image:"",
              villOptions:[] ,
-             email:"",
-             authUid : "",
+             
              profileComplete :false ,
              redirect:false
         }
@@ -82,40 +82,56 @@ class Rural extends Component {
 
     submit =  (e) =>{
       e.preventDefault();
-      let {uname , authUid , email , profileComplete , gender , address ,
+      let {uname ,  profileComplete , gender , address ,
            contact ,  village , town , type  , image    } = this.state ;
+
+       let {loggedIn , email } = this.props ;
+         
    
       this.setState({loading : true });
 
-      Axios.post("http://localhost:5000/api/people" , {uname , authUid , email , profileComplete , gender , address ,
-        contact ,  village , town , type  , image    } )
-        .then( (response) => {
-          console.log(response);
-         
-          this.setState({loading : false  , redirect:true }) ;
+      if(loggedIn)
+      {fire
+        .database()
+        .ref(`people/`)
+        .push({
+          name:this.state.uname ,
+           profileComplete:this.state.profileComplete ,
+            gender :this.state.gender ,
+             address:this.state.address ,
+           contact:this.state.contact , 
+            village:this.state.village , 
+            town : this.state.town,
+             type:this.state.type  ,
+              image : this.state.image,
+              email: email
+        })
+        .then(() => {
+          this.setState({
+            loading : false , profileComplete: true , redirect:true
+          });
+          console.log("Done");
+        })
+        .catch((e)=>{
+          console.log(e);
+          alert("Some Error Occurs");
           
-        })
-        .catch((err) => {
-          console.log(err);  
-          this.setState({loading : false  , redirect:false }) ;
-        })
+        });
+      }
+      else{
+        this.setState({loading:false});
+      }
+     
 
   
     }
-
     componentDidMount(){
 
-      this.setState({type:this.props.type});
+       this.setState({type:this.props.type})
+       console.log(this.props.loggedIn); 
+    }
+
    
-      fire.auth().onAuthStateChanged(user => {
-       if (user) {
-         this.setState({ email: user.email , authUid:user.uid });
-       }
-       else{
-         console.log("{}{}{}")
-       }
-     });
-       }
 
 
 
@@ -143,7 +159,7 @@ class Rural extends Component {
     render(){
 
       if(this.state.redirect)
-      {return <Redirect push to="/test"/> }
+      {return <Redirect push to="/"/> }
 
       return(<div>
         <div style={{ backgroundColor: "lightcoral", borderRadius:"2%" ,
