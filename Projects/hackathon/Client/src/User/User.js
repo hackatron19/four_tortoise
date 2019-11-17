@@ -78,8 +78,10 @@ render() {
     return ( 
       <ResponsiveContainer>
    
+
   
-      <div>
+   <Grid  style={{ marginTop: "0vh", minHeight: "100vh"  }}>
+          <Grid.Column id="headerContainer"   style={{ backgroundColor: "#123445" }}>
 
          {this.state.loading?<Loader active/>: null} 
      
@@ -108,7 +110,8 @@ render() {
 
          
      </Grid>
-        </div>
+        </Grid.Column>
+        </Grid>
             
     
     </ResponsiveContainer>

@@ -18,6 +18,7 @@ import User from './User/User';
 import Account from "./Account/Account";
 import FoodItem from './FoodList/Foodlist';
 import Welcome from './FoodList/buynowVillage'
+import Gallery from './Gallery/Gallery';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path= "/account" component={Account} />
       <Route path= "/buynow" component={FoodItem} />
       <Route path="/show/:id/:id2" component={Welcome} />
+      <Route  path="/gallery" component={Gallery}/>
     
      
     </Switch>

@@ -98,7 +98,7 @@ fire.auth().onAuthStateChanged(user => {
 <Button id="cus" color="yellow" size="massive" floated="right" onClick={this.toggleChange}>Customer</Button>
 </Grid.Column>
 <Grid.Column width={8}>
-<Button id="ret" color="yellow" size="massive" floated="left" onClick={this.toggleChange}  >Villager</Button>
+<Button id="ret" color="yellow" size="massive" floated="left" onClick={this.toggleChange}  >Retailer</Button>
 </Grid.Column>
 
 <Divider/>

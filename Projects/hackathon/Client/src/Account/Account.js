@@ -65,8 +65,6 @@ import { Route,
     {     
       this.setState({type : obj[a].type , peopleId : a});
     }
-     
-   
     };
 
     this.setState({loading:false});
@@ -91,7 +89,7 @@ return ( <ResponsiveContainer>
 
          
      {this.state.type ==="xxx" ? null : 
-     this.state.type ==="Customer" ? <Customer/> : <Retailer peopleId={this.state.peopleId} /> }
+     this.state.type ==="Customer" ? <Customer peopleId={this.state.peopleId} /> : <Retailer peopleId={this.state.peopleId} /> }
               
 </Grid.Column>
 </Grid>

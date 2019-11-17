@@ -75,12 +75,18 @@ class Home extends Component {
   render() {
    return (
       <div style={{ backgroundColor: "#f9f9f9", marginTop: "0vh" }}>
+
+<ResponsiveContainer>
+   
+   
        
         <Grid  style={{ marginTop: "0vh", minHeight: "100vh"  }}>
           <Grid.Column id="headerContainer"   style={{ backgroundColor: "#123445" }}>
 
 
-        <HomepageLayout loggedIn={this.state.loggedIn} /> 
+          <Main1 />
+ 
+
           
    {this.state.loading  ? <Loader active /> : <div><Button negative ><Link to="/auth">Test key</Link></Button>
           <Button positive onClick={this.logout} ><Link to="/auth">Logout</Link></Button>
@@ -95,6 +101,7 @@ class Home extends Component {
 
         
         </Grid>
+        </ResponsiveContainer>
         
       </div>
     );
@@ -113,13 +120,5 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node
 };
 
-const HomepageLayout = () => (
-
-  <ResponsiveContainer>
-   
-    <Main1 />
-  
-  </ResponsiveContainer>
-);
 
 export default Home;

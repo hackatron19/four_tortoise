@@ -73,7 +73,7 @@ import {
     render() {
       const {redirect} = this.state;
       if(redirect){
-      return <Redirect push to="/"/> } ;
+      return <Redirect push to="/profileInfo"/> } ;
       return (
         <Grid>
           <Grid.Column >

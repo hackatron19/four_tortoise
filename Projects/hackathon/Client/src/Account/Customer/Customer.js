@@ -24,6 +24,8 @@ import { Route,
  
 import Addphoto from "../AddPhoto";
 
+import RequestByCustomer from './Request';
+import Transaction from "./Transaction";
 
   
   
@@ -40,6 +42,9 @@ import Addphoto from "../AddPhoto";
 
         return(<div>
             <Addphoto/>
+            <RequestByCustomer/>
+            <Divider/>
+           <Transaction/>
         </div>)
     }
 

@@ -69,7 +69,7 @@ class Addphoto extends Component {
 
     fire
       .database()
-      .ref(`feed/${currentUser.uid}/`)
+      .ref(`gallery/${currentUser.uid}/`)
       .push({
         title,
         description,

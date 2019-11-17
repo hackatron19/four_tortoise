@@ -19,6 +19,7 @@ import {
   GridColumn,
   Divider
 } from "semantic-ui-react";
+import Retailer from '../Account/Retailer/Retailer';
 
 
 
@@ -51,7 +52,8 @@ class Welcome extends Component {
         } ,
 
         custUid:"" ,
-        modal: 0
+        modal: 0 ,
+        bill : false
 
        
     
@@ -59,6 +61,7 @@ class Welcome extends Component {
      this.account= this.account.bind(this);
      this.back = this.back.bind(this).bind(this);
      this.retailerDetails = this.retailerDetails.bind(this);
+     this.billbool = this.billbool.bind(this);
      
     
       }
@@ -112,26 +115,22 @@ class Welcome extends Component {
         this.setState({showSetting: !this.state.showSetting});
     }
 
+    billbool = ()=>{
+      
+      this.setState({bill :  !this.state.bill})
+
+    }
+
     update =(item , index) =>{
 
        let cartmenu  = { product : item.product ,
         cost : item.cost , quantity : this.state.quantity ,
            metric : item.metric  , foodid: Object.keys(item) }
-
        let  list = this.state.list;
-       
        list[index].quantity = list[index].quantity - this.state.quantity; 
-       
-
-        
         let cart = this.state.cart;
-        
         cart.push(cartmenu);
-
         this.setState({cart:cart   , list : list , quantity : 0 } , () => console.log(this.state.cart));
-           
-           
-
     } 
 
 
@@ -144,13 +143,15 @@ class Welcome extends Component {
           var obj = snapshot.val();
            let retailer = { name : obj.name ,
              village : obj.village ,
-            contact : obj.contact }
-          this.setState({retailer } , console.log(this.state.retailer));
+            contact : obj.contact } ;
+
+          this.setState({retailer : retailer } ,() => console.log(this.state.retailer));
         } )
 
 
     }
 
+   
      
       
    componentWillMount (){
@@ -273,7 +274,8 @@ class Welcome extends Component {
               <Table.Cell textAlign="center" width={3}>
                 
                    <Button size="small"color={this.state.showPostItem ? "white" : "yellow"}
-                    onClick={() => this.removeCartItem(item.foodid , index)}>
+                    // onClick={() => this.removeCartItem(item.foodid , index)}
+                    >
                   <Button.Content visible>
                   <Icon name='remove' />
                     Remove
@@ -314,7 +316,9 @@ class Welcome extends Component {
            {cartlist}</div> : null}
 
 
-           <Confirm />
+           <Button float negative onClick={this.billbool} >  Order Here </Button>
+           {this.state.bill ? <Billing cart={this.state.cart} 
+            retailer={this.state.retailer} list={this.state.list} /> : null }
            
     
       <Button positive onClick={this.back} > Back</Button>
@@ -326,4 +330,11 @@ class Welcome extends Component {
   }
 
   export default Welcome;
+
+
+const Billing = (props) => {
+
+
+
+} 
 

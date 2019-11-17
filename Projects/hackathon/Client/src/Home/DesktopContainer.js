@@ -78,21 +78,14 @@ class DesktopContainer extends Component {
                 <Container style={{background:"transparent" ,width:"100%"  }} >
                 <Link to="/"> <Menu.Item as="a" active >Home</Menu.Item></Link>
                 <Link to="/buynow"> <Menu.Item as="a">BuyItems</Menu.Item></Link>
-                <Link to="/">  <Menu.Item as="a">Gallery</Menu.Item> </Link>
+                <Link to="/gallery">  <Menu.Item as="a">Gallery</Menu.Item> </Link>
                 <Link to="/userProfile"> <Menu.Item as="a">Profile</Menu.Item></Link>
                 <Link to="/account">   <Menu.Item as="a">Account</Menu.Item></Link>
                   <Menu.Item position="right">
                     <Button as="a" inverted={!fixed}>
-                      Log in
+                      Log Out
                     </Button>
-                    <Button
-                      as="a"
-                      inverted={!fixed}
-                      primary={fixed}
-                      style={{ marginLeft: "0.5em" }}
-                    >
-                      Sign Up
-                    </Button>
+                    
                   </Menu.Item>
                 </Container>
               </Menu>
