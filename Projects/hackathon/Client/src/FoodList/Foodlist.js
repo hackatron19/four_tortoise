@@ -11,7 +11,9 @@ import {
   Loader,
   Divider,
   Label,
-  Form
+  Form,
+  Table,
+  Input
   } from "semantic-ui-react";
 
   import { Route,
@@ -28,12 +30,15 @@ import {
       this.state = {
         loading: true,
         list: [],
-        keys: []
+        keys: [] ,
+        cartlist:[]
         
       };
 
     
     }
+
+   
     componentDidMount = () => 
     {
 
@@ -59,8 +64,16 @@ import {
       
         
     }
+
+    handleChange(e){
+   e.preventDefault();
+
+   this.setState({quantity: e.target.name});
+
+    }
     
 
+    
     render()
     { return(<div  >
         {this.state.loading ? (
@@ -72,31 +85,33 @@ import {
             <Card.Group itemsPerRow={3} textAlign='center'  >
               { this.state.list.map((item, index) =>
            Object.values(item).map((nestedItem, nestedIndex) => (
+            <Card   >
             <Link to={{
-                pathname: `/buynowVillage/id=${this.state.keys[index]}/id2=${Object.keys(this.state.list[index])[nestedIndex]}`
-                 }} >
-            <Card>
-             
+                  pathname: `/showpost/:id=${this.state.keys[index]}/:id2=${Object.keys(this.state.list[index])[nestedIndex]}`
+                   }} >  
+            
               <Card.Content>
                 <Label as="p" color="white" size="large" ribbon>
-                  Cost : {nestedItem.cost}
+                  Product Name : {nestedItem.product}
                 </Label>
                 <Card.Header style={{ paddingTop: "2vh" }}>
-                  {nestedItem.product}
+                  {nestedItem.cost}
                 </Card.Header>
-                <Card.Description>Rate :  {nestedItem.cost} per {nestedItem.cost}</Card.Description>
-                <Card.Description>Quantity :{nestedItem.quantity}</Card.Description>
+                <Card.Description>{nestedItem.quantity}</Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <p>
                   <Icon name="user" style={{ marginRight: "5%" }} />
-                  ...Retailer Detail
+                  by Retailer....
                 </p>
                 <Divider />
+                <p>
+                  <Icon name="clock" style={{ marginRight: "5%" }} />
+                  { moment( moment(nestedItem.timestamp ,"LLL" ).format('YYYY-MM-DD') ).fromNow()}
+                </p>
                 
-              </Card.Content>
-            </Card>
-            </Link>
+              </Card.Content></Link>
+            </Card> 
              )) )
            }
 
@@ -111,6 +126,17 @@ import {
     }
     
   }
-    
 
     export default FoodItem ;
+
+
+
+
+
+  
+
+
+    
+
+ 
+

@@ -17,6 +17,7 @@ import Retailer from './Account/Retailer/Retailer';
 import User from './User/User';
 import Account from "./Account/Account";
 import FoodItem from './FoodList/Foodlist';
+import ShowPost from './FoodList/buynowVillage'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/userProfile" component={User}/>
       <Route path= "/account" component={Account} />
       <Route path= "/buynow" component={FoodItem} />
+      <Route path="/showpost/:id/:id2" component={ShowPost} />
      
     </Switch>
   </Router>
