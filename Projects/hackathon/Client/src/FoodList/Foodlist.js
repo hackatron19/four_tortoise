@@ -87,7 +87,7 @@ import {
            Object.values(item).map((nestedItem, nestedIndex) => (
             <Card   >
             <Link to={{
-                  pathname: `/showpost/:id=${this.state.keys[index]}/:id2=${Object.keys(this.state.list[index])[nestedIndex]}`
+                  pathname: `/show/id=${this.state.keys[index]}/id2=${Object.keys(this.state.list[index])[nestedIndex]}`
                    }} >  
             
               <Card.Content>

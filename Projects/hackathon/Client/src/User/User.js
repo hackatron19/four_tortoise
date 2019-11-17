@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import fire from "../firebase";
+import PropTypes from "prop-types";
 import {
     
   Grid, Loader,
@@ -7,6 +8,9 @@ import {
   } from "semantic-ui-react";
 
   import  './profile.css';
+
+  import DesktopContainer from '../Home/DesktopContainer';
+  import MobileContainer from '../Home/MobileContainer';
   
   
 
@@ -71,8 +75,11 @@ import {
   
 
 render() {
-    return (<div>
-
+    return ( 
+      <ResponsiveContainer>
+   
+  
+      <div>
 
          {this.state.loading?<Loader active/>: null} 
      
@@ -102,9 +109,27 @@ render() {
          
      </Grid>
         </div>
+            
+    
+    </ResponsiveContainer>
         )
 }
   }
+
+
+  const ResponsiveContainer = ({ children }) => 
+  (
+  <div>
+    <DesktopContainer  >{children }</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+);
+
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node
+};
+
+
 
 
 

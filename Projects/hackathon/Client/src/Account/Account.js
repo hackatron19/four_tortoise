@@ -10,6 +10,8 @@ import {
     Loader
   } from "semantic-ui-react";
 
+  import PropTypes from "prop-types";
+
 
 import { Route,
     
@@ -22,6 +24,9 @@ import { Route,
 
   import Customer from './Customer/Customer';
   import Retailer from './Retailer/Retailer';
+
+  import DesktopContainer from '../Home/DesktopContainer';
+  import MobileContainer from '../Home/MobileContainer';
 
 
  
@@ -77,7 +82,9 @@ import { Route,
     
 
 
-return ( <div>
+return ( <ResponsiveContainer>
+   
+ <div>
    {this.state.loading?<Loader active/>:null}
 <Grid  style={{ marginTop: "0vh", minHeight: "100vh"  }}>
           <Grid.Column id="headerContainer"   style={{  backgroundColor: "#123445" }}>
@@ -90,6 +97,8 @@ return ( <div>
 </Grid>
        </div>
 
+       </ResponsiveContainer>
+
 
     )
  }
@@ -98,6 +107,23 @@ return ( <div>
 
 
 }
+
+
+
+const ResponsiveContainer = ({ children }) => 
+  (
+  <div>
+    <DesktopContainer  >{children }</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+);
+
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node
+};
+
+
+
 
 
 export default Account;
